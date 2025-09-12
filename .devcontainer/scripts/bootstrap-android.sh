@@ -7,11 +7,11 @@ APT_PACKAGES="wget unzip curl openjdk-17-jdk \
   libgl1-mesa-dev libxext6 libxrender1 libxtst6 libxi6"
 
 install_apt_packages() {
-    DEBIAN_FRONTEND=noninteractive apt-get update
+    sudo DEBIAN_FRONTEND=noninteractive apt-get update
     for package in $APT_PACKAGES;
     do
         echo "installing package: $package..."
-        DEBIAN_FRONTEND=noninteractive apt-get  -y install "$package";
+        sudo DEBIAN_FRONTEND=noninteractive apt-get  -y install "$package";
     done
 }
 
@@ -23,6 +23,7 @@ echo "keyboard-configuration keyboard-configuration/layoutcode string us" | sudo
 echo "keyboard-configuration keyboard-configuration/variantcode string " | sudo debconf-set-selections
 
 # Install packages non-interactively
+echo "installing required packages"
 install_apt_packages
 
 # Android SDK setup
