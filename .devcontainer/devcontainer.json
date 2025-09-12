@@ -1,0 +1,28 @@
+{
+  "name": "android-studio-runtime-setup",
+  "image": "mcr.microsoft.com/vscode/devcontainers/universal:2",
+  "remoteUser": "codespace",
+
+  "forwardPorts": [6080, 5901],
+
+  "mounts": [
+    "source=android-sdks,target=/home/vscode/Android/Sdk,type=volume",
+    "source=gradle-cache,target=/home/vscode/.gradle,type=volume"
+  ],
+
+  // This runs once after container is created
+  "postCreateCommand": "bash .devcontainer/scripts/bootstrap-android.sh",
+
+  // This runs every time container starts
+  "postStartCommand": "bash .devcontainer/scripts/start-android-studio.sh",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "redhat.java",
+        "ms-vscode.cpptools"
+      ]
+    }
+  }
+}
